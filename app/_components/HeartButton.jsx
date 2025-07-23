@@ -1,18 +1,22 @@
-import { useDispatch } from 'react-redux'
+"use client"
+
+import { useDispatch, useSelector } from 'react-redux'
 import HeartIcon from "./HeartIcon"
 import React from 'react'
 
 const HeartButton = React.memo(({ pokemon, isBig }) => {
-    const { doLike } = pokemon
+    const heartDict = useSelector((state) => state.heartDictState)
+
+    const pokemonIndex = pokemon.pokemonIndex
+    const doLike = heartDict[pokemonIndex]
 
     const dispatch = useDispatch()
-    const toggleLike = () => dispatch({ type: "pokemonArray/toggleLike", pokemon })
+    const toggleHeart = () => dispatch({ type: "heartDict/toggleHeart", pokemonIndex })
     
     const handleClick = (event) => {
-        console.log("---- i'm here")
         event.stopPropagation()
-        toggleLike()
         event.preventDefault()
+        toggleHeart()
     }
 
     const size = isBig ? "h-[40px]" : "h-[30px]"

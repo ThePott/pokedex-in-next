@@ -32,3 +32,13 @@ export const doFilterHeartSlice = createSlice({
         toggleHeartFilter(state, _action) { return !state },
     }
 })
+
+export const heartDictSlice = createSlice({
+    name: "heartDict",
+    initialState: {},
+    reducers: {
+        toggleHeart(state, action) {
+            return { ...state, [action.pokemonIndex]: !state[action.pokemonIndex] }
+        }
+    }
+})

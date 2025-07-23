@@ -2,21 +2,24 @@
 
 import { getRegExp } from 'korean-regexp'
 import Link from 'next/link'
-// import { useState } from 'react'
+import { useDispatch, useSelector } from 'react-redux'
 import MainPageSkeleton from "./MainPageSkeleton"
 import Searchbar from './Searchbar'
 import Thumbnail from "./Thumbnail"
-import { useDispatch, useSelector } from 'react-redux'
+import { useEffect } from 'react'
 
 const MainPageContainer = ({ pokemonArray }) => {
-  
-  // const [filterText, setFilterText] = useState("")
-  // const [doFilterHeart, setDoFilterHeart] = useState(false)
-  
   const filterText = useSelector((state) => state.filterTextState)
   const doFilterHeart = useSelector((state) => state.doFilterHeartState)
+  const heartDict = useSelector((state) => state.heartDictState)
 
-  
+  const dispatch = useDispatch()
+  useEffect(
+    () => {
+      dispatch({type: "pokemonArray/setPokemonArray", pokemonArray})
+    },
+    []
+  )
 
   if (pokemonArray.length === 0) { return <MainPageSkeleton /> }
 
@@ -26,6 +29,8 @@ const MainPageContainer = ({ pokemonArray }) => {
     if (!doFilterHeart) {
       return !!pokemon.name.match(regExp)
     }
+
+    return !!pokemon.name.match(regExp) && !!heartDict[`${pokemon.pokemonIndex}`]
   })
 
   return (

@@ -1,17 +1,5 @@
 import { configureStore } from "@reduxjs/toolkit";
-import { doFilterHeartSlice, filterTextSlice, pokemonArraySlice } from "./slices";
-
-// const store = configureStore({
-//     reducer: {
-//         pokemonArrayState: pokemonArraySlice.reducer,
-//         doFilterHeartState: doFilterHeartSlice.reducer,
-//     }
-// })
-
-// export default store
-
-
-
+import { doFilterHeartSlice, filterTextSlice, heartDictSlice, pokemonArraySlice } from "./slices";
 
 const makeStore = () => {
     return configureStore({
@@ -19,6 +7,7 @@ const makeStore = () => {
             pokemonArrayState: pokemonArraySlice.reducer,
             filterTextState: filterTextSlice.reducer,
             doFilterHeartState: doFilterHeartSlice.reducer,
+            heartDictState: heartDictSlice.reducer,
         }
     })
 }

@@ -1,10 +1,9 @@
 "use client"
 
-import React, { useMemo, useRef, useState } from 'react'
-import MagnifyingGlassIcon from "../_components/MagnifyingGlassIcon"
-import HeartFilterButton from "../_components/HeartFilterButton"
-import { useRouter } from 'next/navigation'
+import React, { useMemo, useState } from 'react'
 import { useDispatch } from 'react-redux'
+import HeartFilterButton from "../_components/HeartFilterButton"
+import MagnifyingGlassIcon from "../_components/MagnifyingGlassIcon"
 
 const Searchbar = React.memo(() => {
   const [isFocused, setIsFocused] = useState(false)
@@ -20,13 +19,10 @@ const Searchbar = React.memo(() => {
   const borderColor = useMemo(() => `${isFocused ? "border-zinc-300" : "border-zinc-600"}`, [isFocused])
   const containerStyle = useMemo(() => `${containerBaseStyle} ${borderColor}`, [containerBaseStyle, borderColor])
 
-  console.log("---- searchbar re-rendered")
   return (
     <div className={containerStyle}>
       <MagnifyingGlassIcon style={iconStyle} />
       <input type="text"
-        // ref={inputRef}
-        // onKeyDown={handleKeyDown}
         onChange={(event)=> setFilterText(event.target.value)}
         onFocus={() => setIsFocused(true)}
         onBlur={() => setIsFocused(false)}
