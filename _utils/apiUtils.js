@@ -7,7 +7,7 @@ const getJson = async (url) => {
     return json
 }
 
-const getPokemon = async (index) => {
+export const getPokemon = async (index) => {
     try {
 
         const front = `https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/${index}.png`
@@ -30,7 +30,7 @@ const getPokemon = async (index) => {
 
 }
 
-const getAllPokemon = async (setPokemonArray) => {
+export const getAllPokemon = async (setPokemonArray) => {
     const indexArray = [...Array(10).keys()]
     // const indexArray = [...Array(152).keys()]
     indexArray.shift()
@@ -40,4 +40,12 @@ const getAllPokemon = async (setPokemonArray) => {
     setPokemonArray(pokemonArray)
 }
 
-export { getPokemon, getAllPokemon }
+export const getAllPokemonSsr = async () => {
+    // const indexArray = [...Array(10).keys()]
+    const indexArray = [...Array(152).keys()]
+    indexArray.shift()
+
+    const promiseArray = indexArray.reduce((acc, index) => [...acc, getPokemon(index)], [])
+    const pokemonArray = await Promise.all(promiseArray)
+    return pokemonArray
+}

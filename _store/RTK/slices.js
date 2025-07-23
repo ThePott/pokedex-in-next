@@ -1,6 +1,6 @@
 import { createSlice } from "@reduxjs/toolkit";
 
-const pokemonArraySlice = createSlice({
+export const pokemonArraySlice = createSlice({
     name: "pokemonArray",
     initialState: [],
     reducers: {
@@ -17,13 +17,18 @@ const pokemonArraySlice = createSlice({
     }
 })
 
+export const filterTextSlice = createSlice({
+    name: "filterText",
+    initialState: "",
+    reducers: {
+        setFilterText(_state, action) { return action.filterText },
+    }
+})
 
-const doFilterHeartSlice = createSlice({
+export const doFilterHeartSlice = createSlice({
     name: "doFilterHeart",
     initialState: false,
     reducers: {
         toggleHeartFilter(state, _action) { return !state },
     }
 })
-
-export { doFilterHeartSlice, pokemonArraySlice };

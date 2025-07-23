@@ -1,9 +1,11 @@
+"use client"
+
 import React, { useMemo, useState } from 'react'
 import { useSelector } from 'react-redux'
-import { useParams } from 'react-router'
-import HeartButton from '../../components/HeartButton'
-import BackButton from '../../components/BackButton'
+import HeartButton from '../_components/HeartButton'
+import BackButton from '../_components/BackButton'
 import DetailPageSkeleton from "./DetailPageSkeleton"
+import StoreProvider from '../_components/StoreProvider'
 
 const commonFlipSx = {
   transitionProperty: "transform",
@@ -65,10 +67,11 @@ const DetailPage = () => {
 
   const pokemonArray = useSelector((state) => state.pokemonArrayState)
 
-  const params = useParams()
-  if (!params) { return null }
+  // const params = useParams()
+  // if (!params) { return null }
 
-  const pokemonIndex = Number(params.pokemonIndex) ?? 1
+  // const pokemonIndex = Number(params.pokemonIndex) ?? 1
+  const pokemonIndex = 3 // -------------------- dummy -------------------
   const pokemon = pokemonArray.find((pokemon) => pokemon.pokemonIndex === pokemonIndex)
 
   if (!pokemon) { return <DetailPageSkeleton /> }
@@ -95,5 +98,13 @@ const DetailPage = () => {
     </div>
   )
 }
+
+// const WrappedPage = () => {
+//   return (
+//     <StoreProvider>
+//       <DetailPage />
+//     </StoreProvider>
+//   )
+// }
 
 export default DetailPage

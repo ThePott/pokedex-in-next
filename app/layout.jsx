@@ -1,5 +1,6 @@
 import { Noto_Sans_KR } from "next/font/google";
 import "./globals.css";
+import StoreProvider from "./_components/StoreProvider";
 
 const notoSansKr = Noto_Sans_KR({
   variable: "--font-noto-sans-kr",
@@ -16,9 +17,12 @@ export default function RootLayout({ children }) {
   return (
     <html lang="ko">
       <body
-        className={`${notoSansKr.variable}`}
-      >
-          {children}
+        className={`${notoSansKr.variable} w-screen h-screen overflow-hidden pt-3 flex`}>
+        <StoreProvider>
+          <div className="max-w-7xl w-full flex-1 mx-auto overflow-hidden" >
+            {children}
+          </div>
+        </StoreProvider>
       </body>
     </html>
   );

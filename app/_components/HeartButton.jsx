@@ -7,9 +7,12 @@ const HeartButton = React.memo(({ pokemon, isBig }) => {
 
     const dispatch = useDispatch()
     const toggleLike = () => dispatch({ type: "pokemonArray/toggleLike", pokemon })
+    
     const handleClick = (event) => {
+        console.log("---- i'm here")
         event.stopPropagation()
         toggleLike()
+        event.preventDefault()
     }
 
     const size = isBig ? "h-[40px]" : "h-[30px]"

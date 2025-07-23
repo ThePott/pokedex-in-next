@@ -1,5 +1,6 @@
+import Link from "next/link"
 import React, { useState } from "react"
-import { useNavigate } from "react-router"
+// import { useNavigate } from "react-router"
 
 const ChevronLeftIcon = ({ style }) => {
   return (
@@ -15,7 +16,7 @@ const ChevronLeftIcon = ({ style }) => {
 
 const BackButton = React.memo(() => {
   const [isMouseOver, setIsMouseOver] = useState(false)
-  const navigate = useNavigate()
+  // const navigate = useNavigate()
 
   const containerStyle = "absolute top-0 left-0 p-6"
 
@@ -24,12 +25,11 @@ const BackButton = React.memo(() => {
   const iconStyle = `${baseIconStyle} ${iconColor}`
 
   return (
-    <div className={containerStyle}
+    <Link href="/" className={containerStyle}
       onMouseEnter={() => setIsMouseOver(true)}
-      onMouseLeave={() => setIsMouseOver(false)}
-      onClick={() => navigate("/")}>
+      onMouseLeave={() => setIsMouseOver(false)}>
       <ChevronLeftIcon style={iconStyle} />
-    </div>
+    </Link>
   )
 })
 
