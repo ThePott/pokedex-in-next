@@ -31,7 +31,8 @@ const getPokemon = async (index) => {
 }
 
 const getAllPokemon = async (setPokemonArray) => {
-    const indexArray = [...Array(152).keys()]
+    const indexArray = [...Array(10).keys()]
+    // const indexArray = [...Array(152).keys()]
     indexArray.shift()
 
     const promiseArray = indexArray.reduce((acc, index) => [...acc, getPokemon(index)], [])

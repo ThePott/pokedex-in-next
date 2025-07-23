@@ -12,6 +12,7 @@ const usePokemon = () => {
     )
 
     useEffect(() => { getAllPokemon(setPokemonArray) }, [])
+    console.log("---- effect called")
 }
 
 /** input change -> throttle -> filter pokemon name */

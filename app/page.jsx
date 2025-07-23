@@ -3,24 +3,22 @@
 import { getRegExp } from 'korean-regexp'
 import { useMemo } from 'react'
 import { Provider, useSelector } from 'react-redux'
-// import { useNavigate, useSearchParams } from 'react-router'
-import MainPageSkeleton from "./_main-components/MainPageSkeleton"
-import Thumbnail from "./_main-components/Thumbnail"
-import Searchbar from './_main-components/Searchbar'
-import store from './_store/RTK/store'
+import { useSearchParams } from 'next/navigation'
 import { usePokemon } from './_hooks/hooks'
+import MainPageSkeleton from "./_main-components/MainPageSkeleton"
+import Searchbar from './_main-components/Searchbar'
+import Thumbnail from "./_main-components/Thumbnail"
+import store from './_store/RTK/store'
+import Link from 'next/link'
 
 const MainPage = () => {
-  // const [searchParams, _setSearchParams] = useSearchParams()
-  // const navigate = useNavigate()
-
+  const searchParams = useSearchParams()
   const pokemonArray = useSelector((state) => state.pokemonArrayState)
   const doFilterHeart = useSelector((state) => state.doFilterHeartState)
 
   usePokemon()
 
-  // const filterText = useMemo(() => searchParams.get("name") ?? "", [searchParams])
-  const filterText = "" // --------------------------dummy---------------------------------
+  const filterText = useMemo(() => searchParams.get("name") ?? "", [searchParams])
   const regExp = useMemo(() => getRegExp(filterText.trim()), [filterText])
 
   const isVisibleArray = useMemo(
@@ -36,8 +34,8 @@ const MainPage = () => {
 
 
 
+  console.log("---- pokemon array:", pokemonArray)
   if (pokemonArray.length === 0) { return <MainPageSkeleton /> }
-
   return (
     <div className="w-full h-full overflow-hidden flex flex-col gap-3">
       <Searchbar />
@@ -45,10 +43,9 @@ const MainPage = () => {
 
         <section className="grid grid-cols-[repeat(auto-fit,minmax(200px,1fr))] gap-3">
           {pokemonArray.map((pokemon, index) => (
-            // <div key={index} onClick={() => navigate(`/${pokemon.pokemonIndex}`)} className={`${!isVisibleArray[index] && "hidden"}`}>
-            <div key={index} className={`${!isVisibleArray[index] && "hidden"}`}>
+            <Link key={index} href={`/${pokemon.pokemonIndex}`} className={`${!isVisibleArray[index] && "hidden"}`}>
               <Thumbnail pokemon={pokemon} />
-            </div>
+            </Link>
           ))}
         </section>
 
