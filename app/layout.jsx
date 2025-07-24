@@ -4,7 +4,7 @@ import StoreProvider from "./_components/StoreProvider";
 
 const notoSansKr = Noto_Sans_KR({
   variable: "--font-noto-sans-kr",
-  subset: ["ko"]
+  subset: ["latin"]
 })
 
 
